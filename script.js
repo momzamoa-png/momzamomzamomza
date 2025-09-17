@@ -1,5 +1,3 @@
-﻿// script.js
-
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   const producto = params.get("producto");
@@ -27,14 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       try {
-        // Aquí iría el envío a Formspree si lo quisieras mantener
-        // await fetch("https://formspree.io/f/xkgvlbgr", {
-        //   method: "POST",
-        //   headers: { "Content-Type": "application/json" },
-        //   body: JSON.stringify(data),
-        // });
-
-        // Redirigir a la página de "procesando"
+        // Simulación: redirigir a página de "procesando"
         window.location.href = "procesando.html";
       } catch (error) {
         alert("Ocurrió un error al enviar el pedido.");
