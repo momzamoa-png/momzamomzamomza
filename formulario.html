@@ -3,46 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario de Compra</title>
+  <title>Formulario de Pedido</title>
   <link rel="stylesheet" href="style.css">
-  <script>
-    // Captura producto y precio desde la URL
-    window.onload = function () {
-      const params = new URLSearchParams(window.location.search);
-      const producto = params.get("producto");
-      const precio = params.get("precio");
-      if (producto && precio) {
-        document.getElementById("producto").value = producto + " - S/ " + precio;
-      }
-    };
-  </script>
 </head>
 <body>
+  <header>
+    <h1>Completa tu Pedido</h1>
+  </header>
+
   <section id="formulario-compra">
-    <h2>Completa tus datos</h2>
-    <form action="https://formspree.io/f/xkgvlbgr" method="POST">
-      <label for="producto">Producto</label>
+    <form id="pedido-form">
+      <label>Producto:</label>
       <input type="text" id="producto" name="producto" readonly>
 
-      <label for="nombre">Nombre Completo</label>
+      <label>Precio:</label>
+      <input type="text" id="precio" name="precio" readonly>
+
+      <label for="nombre">Nombre completo:</label>
       <input type="text" id="nombre" name="nombre" required>
 
-      <label for="dni">DNI</label>
+      <label for="dni">DNI:</label>
       <input type="text" id="dni" name="dni" required>
 
-      <label for="celular">Celular (WhatsApp)</label>
+      <label for="celular">Celular (WhatsApp):</label>
       <input type="tel" id="celular" name="celular" required>
 
-      <label for="metodo">Método de entrega</label>
+      <label for="metodo">Método de entrega:</label>
       <select id="metodo" name="metodo" required>
-        <option value="envio">Envío a domicilio</option>
+        <option value="domicilio">Envío a domicilio</option>
         <option value="tienda">Recojo en tienda</option>
       </select>
 
       <button type="submit">Enviar Pedido</button>
-      <input type="hidden" name="_redirect" value="procesando.html">
     </form>
   </section>
+
+  <script src="script.js"></script>
+  <script>
+    // Captura los parámetros de la URL y los inserta en el formulario
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("producto")) {
+      document.getElementById("producto").value = params.get("producto");
+    }
+    if (params.get("precio")) {
+      document.getElementById("precio").value = "S/ " + params.get("precio");
+    }
+  </script>
 </body>
 </html>
-
