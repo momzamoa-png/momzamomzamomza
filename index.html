@@ -1,79 +1,24 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pasarela de Pago - Proyecto Universitario</title>
+  <title>Delivery Moro y Nuevo Moro</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <header>
-    <h1>Proyecto Universitario</h1>
-    <p>Este es un proyecto académico de una pasarela de pago simulada.</p>
+    <h1>Tienda Delivery</h1>
+    <p class="local-only">Solo disponible para Moro y Nuevo Moro</p>
   </header>
 
-  <div id="formulario-compra">
-    <h2>Finaliza tu Pedido</h2>
-    <form action="https://formspree.io/f/xkgvlbgr" method="POST">
-      <input type="hidden" name="Producto" value="1060 diamantes" />
-      <input type="hidden" name="Precio" value="S/ 24" />
-      
-      <p><strong>Producto:</strong> <span id="producto-nombre">1060 diamantes</span></p>
-      <p><strong>Precio:</strong> S/ <span id="producto-precio">24</span></p>
-
-      <label for="tipo-entrega">Tipo de entrega:</label>
-      <select id="tipo-entrega" name="Tipo de entrega" required>
-        <option value="Recarga Directa">Recarga Directa</option>
-      </select>
-      
-      <label for="id-freefire">ID de Free Fire:</label>
-      <input type="text" id="id-freefire" name="ID de Free Fire" required />
-
-      <label for="nombre">Nombre completo:</label>
-      <input type="text" id="nombre" name="Nombre" required />
-
-      <label for="celular">Celular (WhatsApp):</label>
-      <input type="tel" id="celular" name="Celular" required />
-
-      <label for="correo">Correo electrónico:</label>
-      <input type="email" id="correo" name="Correo" required />
-
-      <hr style="margin-top: 20px; border-color: #ddd;">
-
-      <h3>Información de Pago (Demostración)</h3>
-      <p style="font-size: 12px; color: #888;">*Este es solo un formulario de demostración para fines académicos. La información de la tarjeta no será procesada ni almacenada.</p>
-      
-      <label for="tarjeta">Número de tarjeta:</label>
-      <input type="text" id="tarjeta" placeholder="XXXX-XXXX-XXXX-XXXX" required pattern="\d{16}" />
-
-      <div style="display: flex; gap: 10px;">
-        <div style="flex-grow: 1;">
-          <label for="vencimiento">Vencimiento (MM/AA):</label>
-          <input type="text" id="vencimiento" placeholder="MM/AA" required pattern="(0[1-9]|1[0-2])\/\d{2}" />
-        </div>
-        <div style="flex-grow: 1;">
-          <label for="cvv">CVV:</label>
-          <input type="text" id="cvv" placeholder="XXX" required pattern="\d{3,4}" />
-        </div>
-      </div>
-
-      <button type="submit">Pagar</button>
-    </form>
-  </div>
-
-  <div id="pasarela-simulada" class="oculto">
-    <h2>Simulación de Pago</h2>
-    <div id="pago-status">
-      <p>Redirigiendo a la pasarela de pago...</p>
-      <p class="status-info"></p>
+  <section class="categorias">
+    <h2>Categoría: Diamantes</h2>
+    <div class="producto">
+      <h3>1060 Diamantes + Bonus</h3>
+      <p class="precio">Precio: S/ 24</p>
+      <a href="formulario.html?producto=1060+Diamantes+Bonus&precio=24" class="btn">Comprar</a>
     </div>
-    <div class="botones-pago">
-      <button onclick="simularPago('exitoso')">Simular Pago Exitoso</button>
-      <button onclick="simularPago('fallido')">Simular Pago Fallido</button>
-    </div>
-  </div>
-  
-  <script src="script.js"></script>
+  </section>
 </body>
 </html>
