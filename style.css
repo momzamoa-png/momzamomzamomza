@@ -1,150 +1,123 @@
 /* Estilos generales */
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background: linear-gradient(135deg, #f9f9f9, #eef2f3);
+  background: #f4f6f8;
   color: #333;
 }
 
-/* Encabezado */
+/* Header */
 header {
-  text-align: center;
-  padding: 30px 20px;
-  background: linear-gradient(90deg, #2c3e50, #3498db);
+  background: #2c3e50;
   color: white;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-}
-
-header h1 {
-  margin: 0;
-  font-size: 2.5em;
-  animation: fadeIn 1s ease;
+  padding: 20px;
+  text-align: center;
 }
 
 .local-only {
-  font-size: 1.1em;
-  margin-top: 10px;
-  font-weight: 300;
+  font-size: 0.9em;
+  color: #f1c40f;
 }
 
 /* Productos */
 .categorias {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 0 20px;
+  padding: 20px;
+  text-align: center;
 }
 
 .producto {
   background: white;
-  border: 1px solid #ddd;
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: fadeInUp 0.8s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: inline-block;
+  margin: 20px;
+  transition: transform 0.3s;
 }
 
 .producto:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-.producto h3 {
-  margin: 15px 0 10px;
-  color: #2c3e50;
+  transform: scale(1.05);
 }
 
 .precio {
-  font-size: 1.3em;
   color: #27ae60;
+  font-weight: bold;
   margin: 10px 0;
 }
 
-/* Botones */
-.btn, button[type="submit"] {
-  display: inline-block;
-  background: linear-gradient(90deg, #27ae60, #2ecc71);
+.btn {
+  background: #2980b9;
   color: white;
-  border: none;
-  padding: 12px 25px;
-  font-size: 1em;
-  border-radius: 8px;
-  cursor: pointer;
+  padding: 10px 20px;
   text-decoration: none;
-  transition: transform 0.2s ease, background 0.3s ease;
+  border-radius: 6px;
+  transition: background 0.3s, transform 0.2s;
 }
 
-.btn:hover, button[type="submit"]:hover {
-  transform: scale(1.05);
-  background: linear-gradient(90deg, #2ecc71, #27ae60);
+.btn:hover {
+  background: #3498db;
+  transform: scale(1.1);
 }
 
 /* Formulario */
 #formulario-compra {
   max-width: 500px;
-  margin: 40px auto;
+  margin: 30px auto;
   background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  animation: fadeInUp 0.8s ease;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 label {
   display: block;
-  font-weight: bold;
   margin-bottom: 6px;
+  font-weight: bold;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-select {
+input, select {
   width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 18px;
+  padding: 10px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 1em;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-input:focus, select:focus {
-  border-color: #3498db;
-  box-shadow: 0 0 5px rgba(52,152,219,0.4);
-  outline: none;
+button {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  font-size: 1.1em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
 }
 
-/* Loader */
+button:hover {
+  background: #2ecc71;
+  transform: scale(1.05);
+}
+
+/* Procesando */
+.procesando {
+  text-align: center;
+  margin-top: 100px;
+}
+
 .loader {
-  margin: 30px auto;
+  margin: 20px auto;
   border: 6px solid #f3f3f3;
   border-top: 6px solid #3498db;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   animation: spin 1s linear infinite;
 }
 
-/* Animaciones */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.botones-pago button:nth-child(2) {
-  background-color: var(--color-red);
-
-}
