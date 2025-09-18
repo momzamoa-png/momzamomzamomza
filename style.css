@@ -1,115 +1,141 @@
-/* Estilos básicos para que se vea limpio y profesional */
+ï»¿/* General */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #f9f9f9, #ececec);
-  color: #333;
+  background-color: #0d1b2a;
+  color: #f1f1f1;
 }
 
 header {
   text-align: center;
-  padding: 20px;
-  background: #222;
-  color: white;
+  padding: 25px 15px;
+  background: #1b263b;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
 h1 {
-  font-size: 2rem;
   margin: 0;
+  color: #00d4ff;
 }
 
-.container {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 20px;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.6s ease-in-out;
-}
-
-form {
+/* SecciÃ³n productos */
+#productos {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  justify-content: center;   /* Centra horizontal */
+  align-items: center;       /* Centra vertical */
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 30px;
+  min-height: 70vh;
+}
+
+.producto {
+  background: #1b263b;
+  border-radius: 10px;
+  width: 250px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.8);
+}
+
+.producto h3 {
+  margin: 15px 0 10px 0;
+  color: #f1f1f1;
+}
+
+.precio {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #4effa1;
+}
+
+/* Botones */
+.btn, button[type="submit"] {
+  display: inline-block;
+  background-color: #00d4ff;
+  color: #0d1b2a;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1em;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.btn:hover,
+button[type="submit"]:hover {
+  background-color: #4effa1;
+  transform: scale(1.05);
+}
+
+/* Formulario */
+#formulario-compra {
+  max-width: 450px;
+  margin: 40px auto;
+  background: #1b263b;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  color: #f1f1f1;
+}
+
+#formulario-compra h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #00d4ff;
+}
+
+.campo {
+  margin-bottom: 15px;
 }
 
 label {
+  display: block;
   font-weight: bold;
-  margin-bottom: 5px;
-  color: #444;
+  margin-bottom: 6px;
 }
 
-input,
-select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="month"] {
   width: 100%;
-  transition: all 0.3s ease;
+  padding: 10px;
+  border: 2px solid #0d1b2a;
+  border-radius: 6px;
+  background: #0d1b2a;
+  color: #fff;
+  font-size: 1em;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
-input:focus,
-select:focus {
-  border-color: #007bff;
+input:focus {
+  border: 2px solid #00d4ff;
+  box-shadow: 0 0 6px #00d4ff;
   outline: none;
-  box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.4);
 }
 
-button {
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  background: linear-gradient(45deg, #007bff, #00c6ff);
-  color: white;
-  font-weight: bold;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 4px 15px rgba(0, 123, 255, 0.5);
-}
-
-/* Estilo para campos inválidos */
 input.error {
-  border: 2px solid red !important;
-  animation: shake 0.3s ease-in-out;
+  border: 2px solid #ff4d4d;
+  box-shadow: 0 0 6px #ff4d4d;
 }
 
-/* Animación de sacudida */
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-}
-
-/* Animación de entrada */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Procesando */
-.procesando {
+.aviso {
+  font-size: 0.9em;
+  color: #ffcc00;
   text-align: center;
-  font-size: 1.5rem;
-  padding: 50px;
+  margin-bottom: 15px;
 }
 
-.procesando span {
-  display: inline-block;
-  animation: dots 1.5s infinite;
-}
 
-@keyframes dots {
-  0% { content: "."; }
-  33% { content: ".."; }
-  66% { content: "..."; }
-}
