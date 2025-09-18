@@ -19,7 +19,7 @@
       campo.classList.remove("error");
     });
 
-    // Validaciones
+    // Validaciones obligatorias
     if (nombre.value.trim() === "") {
       nombre.classList.add("error");
       valido = false;
@@ -35,17 +35,18 @@
       valido = false;
     }
 
-    if (tarjeta.value.trim().length < 16) {
+    // Validaciones de tarjeta SOLO si se rellenan
+    if (tarjeta.value.trim() !== "" && tarjeta.value.trim().length < 16) {
       tarjeta.classList.add("error");
       valido = false;
     }
 
-    if (cvv.value.trim().length !== 3) {
+    if (cvv.value.trim() !== "" && cvv.value.trim().length !== 3) {
       cvv.classList.add("error");
       valido = false;
     }
 
-    if (vencimiento.value.trim() === "") {
+    if (vencimiento.value.trim() !== "" && vencimiento.value.trim().length < 4) {
       vencimiento.classList.add("error");
       valido = false;
     }
