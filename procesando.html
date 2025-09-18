@@ -1,15 +1,57 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Procesando Pago</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #0d1b2a;
+      color: #fff;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 20px;
+      font-size: 1.6em;
+      color: #00d4ff;
+    }
+
+    /* Spinner */
+    .spinner {
+      border: 6px solid #1b263b;
+      border-top: 6px solid #00d4ff;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .mensaje {
+      color: #ccc;
+      font-size: 1.1em;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div style="text-align:center; margin-top:50px;">
-    <h1>⏳ Tu pago está siendo procesado...</h1>
-    <p>En unos momentos recibirás la confirmación.</p>
-  </div>
+  <div class="spinner"></div>
+  <h2>Tu pago está siendo procesado...</h2>
+  <p class="mensaje">Esto puede tardar unos segundos.  
+  Te contactaremos al número proporcionado.</p>
 </body>
 </html>
